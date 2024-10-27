@@ -1,9 +1,8 @@
 const express=require("express")
-const mongoose=require("mongoose")
 const jwt=require("jsonwebtoken")
 const router=express.Router()
 const {z}=require("zod")
-const { User } = require("../db")
+const { User, Account } = require("../db")
 const JWT_SECRET = require("../config")
 const { authMiddleware } = require("../middleware/middleware")
 const UserSchema=z.object({
@@ -35,7 +34,7 @@ const validate=(schema)=>(req,res,next)=>{
 }
 
 router.get("/bulk",async(req,res)=>{
-    const filter=req.query.filter
+    const filter=req.query.filter || "";
     const users=await User.find({
         $or:[{
             firstName:{
@@ -61,7 +60,6 @@ router.post("/signup",validate(UserSchema),async(req,res)=>{
     try {
         const existuser = await User.findOne({username:result.username})
         if(existuser){
-            alert("Try different username")
             return res.status(400).json({
                 errors: result.error.errors
             })
@@ -74,6 +72,10 @@ router.post("/signup",validate(UserSchema),async(req,res)=>{
         password: req.body.password,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+    })
+    const account= await Account.create({
+        userId : user._id,
+        balance: 1+Math.random()*10000
     })
     let token=jwt.sign({userId:user._id},JWT_SECRET)
     return res.status(200).json({

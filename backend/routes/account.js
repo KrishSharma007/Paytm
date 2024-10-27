@@ -11,8 +11,15 @@ router.get("/balance",authMiddleware,async(req,res)=>{
     })
 })
 router.post("/transfer",authMiddleware,async(req,res)=>{
-    const session=await mongoose.startSession()
+   try{ const session=await mongoose.startSession()
     let {to,amount}=req.body
+    amount = parseFloat(amount)
+    if (isNaN(amount) || amount <= 0) {
+
+        await session.abortTransaction();
+        return res.status(400).json({ message: "Invalid transfer amount" });
+    }
+
     const fromAccount= await Account.findOne({userId:req.userId})
     if (!fromAccount||fromAccount.balance<amount) {
         await session.abortTransaction();
@@ -34,4 +41,13 @@ router.post("/transfer",authMiddleware,async(req,res)=>{
     res.status(200).json({
         message:"Transfer successful"
     })
+}catch(error){
+        await session.abortTransaction();
+        console.error(error);
+        res.json({
+            message:"something went wrong"
+        })
+    }finally {
+        session.endSession();
+    }
 })

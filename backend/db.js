@@ -9,7 +9,7 @@ const connect=async()=>{
  }
 connect();
 const UserSchema = new mongoose.Schema({
-    uername:{
+    username:{
         type: String,
         required: true,
         unique: true,
@@ -38,12 +38,12 @@ const UserSchema = new mongoose.Schema({
 })
 const AccountSchema= new mongoose.Schema({
     userId: {
-        Type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
     balance: {
-        Type: Number,
+        type: Number,
         required:true,
     }
 })

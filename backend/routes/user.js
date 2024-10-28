@@ -16,9 +16,9 @@ const SigninSchema=z.object({
     password: z.string().min(6),
 })
 const UpdateUserSchema=z.object({
-    password: z.string().optional().min(6),
-    firstName: z.string().optional().max(50),
-    lastName: z.string().optional().max(50),
+    password: z.string().min(6).optional(),
+    firstName: z.string().max(50).optional(),
+    lastName: z.string().max(50).optional(),
 })
 
 const validate=(schema)=>(req,res,next)=>{
@@ -57,12 +57,14 @@ router.get("/bulk",async(req,res)=>{
 })
 router.post("/signup",validate(UserSchema),async(req,res)=>{
     let result=req.body
+    console.log(result);
     try {
         const existuser = await User.findOne({username:result.username})
+        console.log(existuser);
         if(existuser){
             return res.status(400).json({
-                errors: result.error.errors
-            })
+                errors: [{ message: "Username already exists. Try a different username." }]
+            });
         }
     } catch (error) {
         console.log(error)
@@ -109,7 +111,7 @@ router.post("/signin",validate(SigninSchema),async(req,res)=>{
         })
     }
 })
-router.delete()
+
 
 
 module.exports=router

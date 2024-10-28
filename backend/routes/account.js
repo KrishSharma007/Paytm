@@ -11,7 +11,9 @@ router.get("/balance",authMiddleware,async(req,res)=>{
     })
 })
 router.post("/transfer",authMiddleware,async(req,res)=>{
-   try{ const session=await mongoose.startSession()
+    let session;
+   try{ session=await mongoose.startSession()
+    session.startTransaction();
     let {to,amount}=req.body
     amount = parseFloat(amount)
     if (isNaN(amount) || amount <= 0) {
@@ -51,3 +53,5 @@ router.post("/transfer",authMiddleware,async(req,res)=>{
         session.endSession();
     }
 })
+
+module.exports = router;

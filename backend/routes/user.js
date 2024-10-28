@@ -86,7 +86,13 @@ router.post("/signup",validate(UserSchema),async(req,res)=>{
     })
 })
 router.put("/",validate(UpdateUserSchema),authMiddleware,async(req,res)=>{
-    await User.updateOne(req.body,{id: req.userId})
+    console.log(req.body);
+    console.log(req.userId);
+    const existingUser = await User.findById(req.userId);
+console.log('Existing User:', existingUser);
+
+    let result=await User.updateOne({_id: req.userId},{$set:req.body})
+    console.log(result)
     res.status(200).json({
         message:"updated successfully"
     })

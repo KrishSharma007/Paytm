@@ -7,8 +7,8 @@ const JWT_SECRET = require("../config")
 const { authMiddleware } = require("../middleware/middleware")
 const UserSchema=z.object({
     username: z.string().min(3).max(30),
-    firstName: z.string().max(50),
-    lastName: z.string().max(50),
+    firstName: z.string().min(1).max(50),
+    lastName: z.string().min(1).max(50),
     password: z.string().min(6),
 })
 const SigninSchema=z.object({
@@ -17,8 +17,8 @@ const SigninSchema=z.object({
 })
 const UpdateUserSchema=z.object({
     password: z.string().min(6).optional(),
-    firstName: z.string().max(50).optional(),
-    lastName: z.string().max(50).optional(),
+    firstName: z.string().min(1).max(50).optional(),
+    lastName: z.string().min(1).max(50).optional(),
 })
 
 const validate=(schema)=>(req,res,next)=>{
@@ -38,11 +38,13 @@ router.get("/bulk",async(req,res)=>{
     const users=await User.find({
         $or:[{
             firstName:{
-                "$regex":filter
+                "$regex":filter,
+                "$options": "i"
             }
         },{
             lastName:{
-                "$regex":filter
+                "$regex":filter,
+                "$options": "i"
             }
         }]
     })
@@ -112,7 +114,27 @@ router.post("/signin",validate(SigninSchema),async(req,res)=>{
         })
     }
 })
-
+router.get("/me",authMiddleware,async(req,res)=>{
+    let user= await User.findById(req.userId)
+    try{
+    if(user){
+        res.status(200).json({
+            logged: true,
+            username : user.username
+        })
+    }else{
+        res.status(200).json({
+            logged: false,
+            message: "User not found"
+        })
+    }}catch (error) {
+        console.error("Error fetching user:", error);
+        res.status(500).json({
+            logged: false,
+            message: "Internal server error"
+        });
+    }
+})
 
 
 module.exports=router

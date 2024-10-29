@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './App.css'
 import { Signup } from './pages/Signup';
 import { Signin } from './pages/Signin';
@@ -17,6 +17,7 @@ function App() {
         <Route path='/signin' element={<Signin/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/send' element={<Sendmoney/>}></Route>
+        <Route path="*" element={<Navigate to="/signin" />} />
       </Routes>
     </BrowserRouter>
     </>

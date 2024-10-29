@@ -1,9 +1,3 @@
-// export function Balance({value}){
-//     return <div className="flex w-full">
-//         <div className="font-medium">Your Balance</div>
-//         <div className="ml-3">&#8377;{value}</div>
-//     </div>
-// }
 
 export function Balance({ value }) {
     return (

@@ -17,7 +17,7 @@ export function Sendmoney() {
     useEffect(() => {
         const checkAuth = async () => {
             const token = localStorage.getItem("token");
-            console.log("Token:", token); // Debugging line
+            console.log("Token:", token); 
 
             try {
                 const response = await axios.get("http://localhost:3000/api/v1/user/me", {
@@ -25,12 +25,12 @@ export function Sendmoney() {
                         Authorization: "Bearer " + token,
                     },
                 });
-                console.log("Auth Response:", response.data); // Debugging line
+                console.log("Auth Response:", response.data); 
 
                 if (response.data.logged) {
                     setAuth(true);
                 } else {
-                    console.log("User not logged in."); // Debugging line
+                    console.log("User not logged in.");
                     nav("/signin");
                 }
             } catch (error) {
@@ -40,10 +40,10 @@ export function Sendmoney() {
         };
 
         checkAuth();
-    }, [nav]); // Ensure nav is in dependencies
+    }, [nav]);
 
     if (!auth) {
-        return <div>Loading...</div>; // Or any loading indicator
+        return <div>Loading...</div>;
     }
 
     return (

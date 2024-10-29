@@ -2,17 +2,6 @@ import { useEffect, useState } from "react";
 import { InputBox } from "./InputBox";
 import { Listusers } from "./listusers";
 import axios from "axios";
-import { array } from "prop-types";
-
-// export function Users(){
-//     return <div className="pl-4">
-//         <InputBox label={"Users"} placeholder={"Search users.."}></InputBox>
-//         <ul className="mt-6">
-//             <Listusers></Listusers>
-//         </ul>
-//     </div>
-// }
-
 
 export function Users({username}) {
     const [users,setUsers]=useState([]);

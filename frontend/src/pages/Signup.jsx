@@ -43,7 +43,7 @@ export const Signup=()=>{
                 <SubHeading label={"Enter your information to create an account"}></SubHeading>
                 <InputBox onChange={e=>{setFirstName(e.target.value)}} type={"text"} placeholder={"John"} label={"First Name"}></InputBox>
                 <InputBox onChange={e=>{setLastName(e.target.value)}} type={"text"} placeholder={"Doe"} label={"Last Name"}></InputBox>
-                <InputBox onChange={e=>{setUsername(e.target.value)}} type={"text"} placeholder={"Enter username"} label={"Username"}></InputBox>
+                <InputBox onChange={e=>{setUsername(e.target.value)}} type={"text"} placeholder={"Ente username"} label={"Username"}></InputBox>
                 <InputBox onChange={e=>{setPassword(e.target.value)}} type={"Password"} placeholder={"Enter password"} label={"Password"}></InputBox>
                 <div className="mt-4">
                 <Button onClick={async()=>{

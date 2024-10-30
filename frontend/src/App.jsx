@@ -17,7 +17,7 @@ function App() {
         <Route path='/signin' element={<Signin/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/send' element={<Sendmoney/>}></Route>
-        <Route path="*" element={<Navigate to="/signin" />} />
+        <Route path="*" element={<Navigate to="/signin" replace />} />
       </Routes>
     </BrowserRouter>
     </>

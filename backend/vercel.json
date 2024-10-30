@@ -6,6 +6,6 @@
     }],
     "routes": [{
         "src": "/(.*)",
-        "dest": "/signin" 
+        "dest": "/index.html" 
     }] 
 }

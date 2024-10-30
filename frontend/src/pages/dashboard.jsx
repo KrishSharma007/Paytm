@@ -4,6 +4,7 @@ import { Balance } from "../components/Balance";
 import { Users } from "../components/Users";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../url";
 
 export const Dashboard = () => {
     const [balance, setBalance] = useState(0);
@@ -14,7 +15,7 @@ export const Dashboard = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/user/me", {
+                const response = await axios.get(url+"/api/v1/user/me", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
                     },
@@ -38,7 +39,7 @@ export const Dashboard = () => {
 
     const fetchBalance = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/api/v1/account/balance", {
+            const response = await axios.get(url+"/api/v1/account/balance", {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },

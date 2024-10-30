@@ -1,7 +1,8 @@
 const mongoose=require("mongoose")
 const connect=async()=>{
     try {
-        await mongoose.connect("mongodb+srv://krishsharma8105:Tannu%40007@paytm.n0cdo.mongodb.net/")
+        // await mongoose.connect("mongodb+srv://krishsharma8105:Tannu%40007@paytm.n0cdo.mongodb.net/")
+        await mongoose.connect("mongodb+srv://krishsharma8105:Tannu%40007@paytm.n0cdo.mongodb.net/test?retryWrites=true&w=majority&appName=Paytm")
         console.log("Connected to db......");
     } catch (error) {
         console.log("Error occured while connecting to db.....");

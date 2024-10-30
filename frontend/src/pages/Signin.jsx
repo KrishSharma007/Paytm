@@ -6,6 +6,7 @@ import { SubHeading } from "../components/SubHeading"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { url } from "../../url";
 export const Signin=()=>{
     const[username,setUsername]=useState("");
     const[password,setPassword]=useState("");
@@ -16,7 +17,7 @@ export const Signin=()=>{
         console.log("Token:", token);
 
         try {
-            const response = await axios.get("http://localhost:3000/api/v1/user/me", {
+            const response = await axios.get(url+"/api/v1/user/me", {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
@@ -42,7 +43,7 @@ export const Signin=()=>{
                 <InputBox onChange={(e)=>{setPassword(e.target.value)}} type={"Password"} placeholder={"Enter password"} label={"Password"}></InputBox>
                 <Button onClick={async()=>{
                     try {
-                        const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+                        const response = await axios.post(url+"/api/v1/user/signin", {
                             username,
                             password
                         });

@@ -5,6 +5,7 @@ import { Profile } from "../components/profile";
 import { Heading } from "../components/SignHeading";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { url } from "../../url";
 
 export function Sendmoney() {
     const [auth, setAuth] = useState(false);
@@ -20,7 +21,7 @@ export function Sendmoney() {
             console.log("Token:", token); 
 
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/user/me", {
+                const response = await axios.get(url+"/api/v1/user/me", {
                     headers: {
                         Authorization: "Bearer " + token,
                     },
@@ -59,7 +60,7 @@ export function Sendmoney() {
                     </div>
                     <Button onClick={async () => {
                         try {
-                            await axios.post("http://localhost:3000/api/v1/account/transfer", {
+                            await axios.post(url+"/api/v1/account/transfer", {
                                 to: id,
                                 amount
                             }, {

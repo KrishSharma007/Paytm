@@ -8,4 +8,4 @@ app.use(cors())
 app.use(express.json())
 app.use("/api/v1",routes);
 app.use(universalErrorHandler);
-app.listen(port,()=>{console.log(`listing to ${port} `);})
+app.listen(port,'0.0.0.0',()=>{console.log(`listing to ${port} `);})

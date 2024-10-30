@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { InputBox } from "./InputBox";
 import { Listusers } from "./listusers";
 import axios from "axios";
+import { url } from "../../url";
 
 export function Users({username}) {
     const [users,setUsers]=useState([]);
@@ -9,7 +10,7 @@ export function Users({username}) {
     useEffect(()=>{
         const fetchUsers = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/user/bulk?filter="+filter);
+                const response = await axios.get(url+"/api/v1/user/bulk?filter="+filter);
                 let array=response.data.user
                 array=array.filter((e)=>{
                     if (e.username!=username) {

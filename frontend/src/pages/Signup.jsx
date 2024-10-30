@@ -6,6 +6,7 @@ import { SubHeading } from "../components/SubHeading"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../url";
 
 export const Signup=()=>{
     const[firstName,setFirstName]=useState("");
@@ -19,7 +20,7 @@ export const Signup=()=>{
         console.log("Token:", token);
 
         try {
-            const response = await axios.get("http://localhost:3000/api/v1/user/me", {
+            const response = await axios.get(url+"/api/v1/user/me", {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
@@ -48,7 +49,7 @@ export const Signup=()=>{
                 <div className="mt-4">
                 <Button onClick={async()=>{
                     try {
-                        const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+                        const response = await axios.post(url+"/api/v1/user/signup", {
                             username,
                             firstName,
                             lastName,

@@ -41,35 +41,6 @@ This platform can be adapted for:
    ```sh
    npm run dev  # Runs both frontend & backend
    ```
-
----
-
-## 📂 Project Structure
-```
-Paytm/
-│── client/        # Frontend (React + Vite)
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── assets/
-│   │   ├── App.js
-│   │   ├── main.js
-│   ├── public/
-│   ├── index.html
-│   ├── package.json
-│
-│── server/        # Backend (Express + MongoDB)
-│   ├── models/
-│   ├── routes/
-│   ├── controllers/
-│   ├── config/
-│   ├── index.js
-│   ├── package.json
-│
-│── .env           # Environment variables
-│── README.md      # Project documentation
-```
-
 ---
 
 ## 🤝 Contributing
